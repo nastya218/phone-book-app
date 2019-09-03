@@ -5,12 +5,12 @@ from django.http import HttpResponseNotFound
 
 from .models import phoneNumber
  
-# получение данных из бд
+
 def index(request):
     Pnumber = phoneNumber.objects.all()
     return render(request, "index.html", {"Pnumber": Pnumber})
  
-# сохранение данных в бд
+
 def create(request):
     if request.method == "POST":
         newNumber = phoneNumber()
@@ -19,7 +19,7 @@ def create(request):
         newNumber.save()
     return HttpResponseRedirect("/")
 
-# изменение данных в бд
+
 def edit(request, id):
     try:
         newNumber = phoneNumber.objects.get(id=id)
@@ -34,7 +34,7 @@ def edit(request, id):
     except phoneNumber.DoesNotExist:
             return HttpResponseNotFound("<h2>Контакта не существует</h2>")
      
-# удаление данных из бд
+
 def delete(request, id):
     try:
         newNumber = phoneNumber.objects.get(id=id)
