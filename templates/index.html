@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Phone Book</title>   
+
+</head>
+<body class="container">
+    <form method="POST" action="create/">
+        {% csrf_token %}
+        <p>
+            <label>Введите имя</label><br>
+            <input type="text" name="name" />
+        </p>
+        <p>
+            <label>Введите номер</label><br>
+            <input type="text" name="numberPhone" />
+        </p>
+        <input type="submit" value="Сохранить" >
+    </form>
+    {% if Pnumber.count > 0 %}
+    <h2>Список контактов</h2>
+     <table>
+        <tr>
+            <th>Id</th><th>Имя</th><th>Телефон</th></tr>
+        {% for  phoneNumber in Pnumber %}
+        <tr>
+            <td>{{  phoneNumber.id }}</td>
+            <td>{{  phoneNumber.phoneNumber_name }}</td>
+            <td>{{  phoneNumber.phoneNumber_number }}</td>
+            <td><button onclick="location.href = 'edit/{{phoneNumber.id}}'">Изменить</button> | <td> <button id="btnDeleted" onclick="location.href ='delete/{{phoneNumber.id}}'">Удалить</button></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>
